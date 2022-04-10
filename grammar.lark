@@ -1,0 +1,36 @@
+%import common.LETTER
+%import common.INT
+%import common.CNAME
+%import common.WORD
+%import common.FLOAT
+%import common.WS
+%ignore WS
+
+start               : set_of_affirmations+
+set_of_affirmations : affirmation+
+affirmation         : assigment | plot | save
+assigment           : variable "=" data_extraction | variable "=" computation
+plot                : LMPLOT df | SCATTERPLOT df | DISPLOT df | BARPLOT df | COUNTPLOT df
+data_extraction     : "extract" string_list "from" image | "extract" string_list "from" folder
+computation         : COMPUTE measure "on" df "[" "each" INT "rows" "]"  | COMPUTE measure "on" variable | percentage "percent" range "rows" df
+save                : "save" df "as" format
+image               : "image" string
+folder              : "folder" string
+measure             : WORD
+format              : "csv" | "xls"
+df                  : variable
+percentage          : INT
+range               : "[" INT "to" INT  "]" | "[" INT "]"
+string_list         : "[" string_items  "]"
+string_items        : string | string comma string_items
+string              : "["WORD"]"   |  "[" IMG_FILE "]" | WORD
+variable            : CNAME
+num                 : FLOAT
+COMPUTE             : "compute"
+IMG_FILE            : WORD "." WORD
+LMPLOT              : "lmplot"
+SCATTERPLOT         : "scatterplot"
+DISPLOT             : "displot"
+BARPLOT             : "barplot"
+COUNTPLOT           : "countplot"
+comma               : ","
