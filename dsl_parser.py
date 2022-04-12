@@ -34,12 +34,24 @@ def computation(t):
 
     if t.children[0].children[0].children[0] == "mean":
         df = get_df(t.children[0].children[1])
-        # in case int after the specified dataframe
-        if t.children[0].children[2] and t.children[0].children[2].isdigit():
-            each = int(t.children[0].children[2])
-            df_each_x = df.groupby(np.arange(len(df))//3).mean()
-            df = df_each_x
-        print(df)
+        df_mean = 0
+        var_exists = False
+        try:
+            t.children[0].children[2]
+        except:
+            var_exists = False
+        else:
+            var_exists = True
+        if var_exists:
+            if t.children[0].children[2].isdigit():
+                each = int(t.children[0].children[2])
+                df_each_x = df.groupby(np.arange(len(df))//each).mean()
+                df_mean = df_each_x
+        else:
+            mean = df.mean()
+            df_mean = pd.DataFrame(mean, columns=['mean'])
+        print(df_mean)
+    return df_mean
 
 
 def run_instruction(t):
