@@ -9,34 +9,38 @@
 start               : set_of_affirmations+
 set_of_affirmations : affirmation+
 affirmation         : assigment | plot | save
-assigment           : variable "=" data_extraction | variable "=" computation
-plot                : LMPLOT df | SCATTERPLOT df | DISPLOT df | BARPLOT df | COUNTPLOT df
+assigment           : df "=" data_extraction | df "=" computation
+plot                : LMPLOT df "," columns
+                    | SCATTERPLOT df "," columns
+                    | BARPLOT df "," columns
+                    | DISPLOT df "," column
+                    | COUNTPLOT df "," column
+columns             : "x" "=" WORD "," "y" "=" WORD
+column              : "x" "=" WORD
 data_extraction     : "extract" string_list "from" image | "extract" string_list "from" folder
 computation         : measure | percentage
-measure             : "compute" value "on" df "[" "each" INT "rows" "]"  | "compute" value "on" variable
-percentage          : INT "percent" range "rows" df
+measure             : "compute" value "on" df "[" "each" INT "rows" "]"  | "compute" value "on" df
+percentage          : INT "percent" df | INT "percent" range "rows" df
 save                : "save" df "as" format
 image               : "image" string
 folder              : "folder" string
-value             : MEAN | STDEV | MAX | MEDIAN | MODE | SUM
+value               : MEAN | STDEV | MAX | MEDIAN | MODE | SUM
 format              : "csv" | "xls"
-df                  : variable
+df                  : CNAME | CNAME string_list
 range               : "[" INT "to" INT  "]" | "[" INT "]"
 string_list         : "[" string_items  "]"
-string_items        : string | string comma string_items
+string_items        : string | string "," string_items
 string              : "["WORD"]"   |  "[" IMG_FILE "]" | WORD
-variable            : CNAME
 num                 : FLOAT
+IMG_FILE            : WORD "." WORD
 MEAN                : "mean"
 STDEV               : "stdev"
 MAX                 : "max"
 MEDIAN              : "median"
 MODE                : "mode"
 SUM                 : "sum"
-IMG_FILE            : WORD "." WORD
 LMPLOT              : "lmplot"
 SCATTERPLOT         : "scatterplot"
 DISPLOT             : "displot"
 BARPLOT             : "barplot"
 COUNTPLOT           : "countplot"
-comma               : ","
