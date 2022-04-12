@@ -1,0 +1,1 @@
+b = compute mean on a[name, age]

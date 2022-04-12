@@ -8,8 +8,8 @@
 
 start               : set_of_affirmations+
 set_of_affirmations : affirmation+
-affirmation         : assigment | plot | save
-assigment           : df "=" data_extraction | df "=" computation
+affirmation         : assignment | plot | save | show
+assignment           : df "=" data_extraction | df "=" computation
 plot                : LMPLOT df "," columns
                     | SCATTERPLOT df "," columns
                     | BARPLOT df "," columns
@@ -22,10 +22,11 @@ computation         : measure | percentage
 measure             : "compute" value "on" df "[" "each" INT "rows" "]"  | "compute" value "on" df
 percentage          : INT "percent" df | INT "percent" range "rows" df
 save                : "save" df "as" format
+show                : "show" df
 image               : "image" string
 folder              : "folder" string
 value               : MEAN | STDEV | MAX | MEDIAN | MODE | SUM
-format              : "csv" | "xls"
+format              : CSV | XLSX
 df                  : CNAME | CNAME string_list
 range               : "[" INT "to" INT  "]" | "[" INT "]"
 string_list         : "[" string_items  "]"
@@ -33,6 +34,8 @@ string_items        : string | string "," string_items
 string              : "["WORD"]"   |  "[" IMG_FILE "]" | WORD
 num                 : FLOAT
 IMG_FILE            : WORD "." WORD
+XLSX                : "xlsx"
+CSV                 : "csv"
 MEAN                : "mean"
 STDEV               : "stdev"
 MAX                 : "max"
