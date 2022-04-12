@@ -6,10 +6,9 @@
 %import common.WS
 %ignore WS
 
-start               : set_of_affirmations+
-set_of_affirmations : affirmation+
+start               : affirmation+
 affirmation         : assignment | plot | save | show
-assignment           : df "=" data_extraction | df "=" computation
+assignment          : df "=" data_extraction | df "=" computation
 plot                : LMPLOT df "," columns
                     | SCATTERPLOT df "," columns
                     | BARPLOT df "," columns
@@ -29,9 +28,8 @@ value               : MEAN | STDEV | MAX | MEDIAN | MODE | SUM
 format              : CSV | XLSX
 df                  : CNAME | CNAME string_list
 range               : "[" INT "to" INT  "]" | "[" INT "]"
-string_list         : "[" string_items  "]"
-string_items        : string | string "," string_items
-string              : "["WORD"]"   |  "[" IMG_FILE "]" | WORD
+string_list         : "[" [string ("," string)*]  "]"
+string              : "[" IMG_FILE "]" | WORD
 num                 : FLOAT
 IMG_FILE            : WORD "." WORD
 XLSX                : "xlsx"

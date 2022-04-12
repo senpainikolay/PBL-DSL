@@ -1,1 +1,1 @@
-b = compute mean on a[name, age]
+b = compute mean on df[Name, Age] [each 3 rows]
