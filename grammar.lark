@@ -12,21 +12,27 @@ affirmation         : assigment | plot | save
 assigment           : variable "=" data_extraction | variable "=" computation
 plot                : LMPLOT df | SCATTERPLOT df | DISPLOT df | BARPLOT df | COUNTPLOT df
 data_extraction     : "extract" string_list "from" image | "extract" string_list "from" folder
-computation         : COMPUTE measure "on" df "[" "each" INT "rows" "]"  | COMPUTE measure "on" variable | percentage "percent" range "rows" df
+computation         : measure | percentage
+measure             : "compute" value "on" df "[" "each" INT "rows" "]"  | "compute" value "on" variable
+percentage          : INT "percent" range "rows" df
 save                : "save" df "as" format
 image               : "image" string
 folder              : "folder" string
-measure             : WORD
+value             : MEAN | STDEV | MAX | MEDIAN | MODE | SUM
 format              : "csv" | "xls"
 df                  : variable
-percentage          : INT
 range               : "[" INT "to" INT  "]" | "[" INT "]"
 string_list         : "[" string_items  "]"
 string_items        : string | string comma string_items
 string              : "["WORD"]"   |  "[" IMG_FILE "]" | WORD
 variable            : CNAME
 num                 : FLOAT
-COMPUTE             : "compute"
+MEAN                : "mean"
+STDEV               : "stdev"
+MAX                 : "max"
+MEDIAN              : "median"
+MODE                : "mode"
+SUM                 : "sum"
 IMG_FILE            : WORD "." WORD
 LMPLOT              : "lmplot"
 SCATTERPLOT         : "scatterplot"
