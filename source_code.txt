@@ -1,7 +1,8 @@
-a = extract [name, age, xx] from image [xyz.jpg]  
-b = compute mean on a[name, xx]
-m = compute mean on a[each 12 rows]
-n = 30 percent [20 to 60] rows a
-lmplot a, x = name, y = age
+b = compute mean on a[Name, Age]
+m = compute median on a[each 3 rows]
+n = 30 percent [1 to 3] rows a
+n = 30 percent a
+barplot a, x = Name, y = Age
+countplot a, x = Age
 save a as csv
 show a

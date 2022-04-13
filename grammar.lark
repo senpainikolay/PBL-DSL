@@ -24,7 +24,7 @@ save                : "save" df "as" format
 show                : "show" df
 image               : "image" string
 folder              : "folder" string
-value               : MEAN | STDEV | MAX | MEDIAN | MODE | SUM
+value               : MEAN | STDEV | MAX | MIN | MEDIAN | MODE | SUM
 format              : CSV | XLSX
 df                  : CNAME | CNAME string_list
 range               : "[" INT "to" INT  "]" | "[" INT "]"
@@ -37,6 +37,7 @@ CSV                 : "csv"
 MEAN                : "mean"
 STDEV               : "stdev"
 MAX                 : "max"
+MIN                 : "min"
 MEDIAN              : "median"
 MODE                : "mode"
 SUM                 : "sum"
