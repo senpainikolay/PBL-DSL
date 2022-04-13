@@ -120,12 +120,16 @@ class Interpreter:
             if self.children_exists(t.children[1].data):
                 # if a range is given
                 if t.children[1].data == "range":
-                    start = t.children[1].children[0]
-                    end = t.children[1].children[1]
-                    start = int(start)
-                    end = int(end) + 1
-
-                    df_percentage = df_int.iloc[start:end] * percents
+                    try:
+                        start = t.children[1].children[0]
+                        end = t.children[1].children[1]
+                        start = int(start)
+                        end = int(end) + 1
+                        df_percentage = df_int.iloc[start:end] * percents
+                    except:
+                        start = t.children[1].children[0]
+                        start = int(start)
+                        df_percentage = df_int.iloc[start] * percents
 
                 # no range given
                 elif t.children[1].data == "df":
@@ -211,13 +215,6 @@ class Interpreter:
                     plt.show()
             else:
                 print("WARNING! Only X column needs to be specified!")
-
-        # child[1] = dataframe which is plotted
-        # if t.children[2].data = column : else:
-        # x = t.children[2].children[0]
-        # y = t.children[2].children[1]
-        #print(t.children[2].children[0])
-        return
 
     def run_instruction(self, t):
         if t.data == 'affirmation':
