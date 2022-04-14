@@ -1,8 +1,14 @@
 b = compute mean on a[Name, Age]
-m = compute median on a[each 3 rows]
-n = 30 percent [1 to 3] rows a
-n = 30 percent a
+m = compute max on a[Name][each 3 rows]
+m = compute mode on b
+n = 30 percent [2 to 4] rows a
+n = 54 percent [2] rows a
+n = 9 percent a
 barplot a, x = Name, y = Age
 countplot a, x = Age
-save a as csv
+save a as csv named myData
+save b as xlsx named docB
 show a
+show b
+show m
+show n

@@ -1,5 +1,6 @@
 from Parser_DSL import ParserDSL
 from Interpreter import Interpreter
+import warnings
 
 # The grammar of the DSL
 with open("grammar.lark") as grammar:

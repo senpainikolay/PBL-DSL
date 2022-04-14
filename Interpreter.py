@@ -32,7 +32,8 @@ class Interpreter:
         return lst
 
     def get_df(self, t):
-        key_name = t.children[0]
+        if t.data == "df":
+            key = t.children[0]
         try:
             if self.children_exists(t.children[1].data):
                 if t.children[1].data == "string_list":
@@ -43,11 +44,15 @@ class Interpreter:
         data = {'Name': ['Tom', 'Joseph', 'Krish', 'John', 'Maria', 'Ion', 'Andreea'],
                 'Age': [20, 21, 19, 18, 21, 18, 21]}
         df = pd.DataFrame(data)
+        if key == "a":
+            globals()[key] = Variable(key, df)
+
+        value = globals()[key].value
 
         if len(lst) > 0:
             df = df[lst]
 
-        return df
+        return value
 
     def compute_measure(self, t, measure):
         df = self.get_df(t.children[0].children[1])
@@ -106,7 +111,10 @@ class Interpreter:
 
     def compute_percentage(self, t):
         df_percentage = 0
-        df = self.get_df(t.children[1])
+        if t.children[1].data == "df":
+            df = self.get_df(t.children[1])
+        else:
+            df = self.get_df(t.children[2])
 
         # gen only numerical columns
         cols = np.where(df.dtypes != 'O')
@@ -221,6 +229,23 @@ class Interpreter:
             self.run_instruction(t.children[0])
             if t.children[0].data == "plot":
                 self.plot_df(t.children[0])
+            elif t.children[0].data == "show":
+                key = t.children[0].children[0].children[0]
+                try:
+                    print("Value of", key, ":")
+                    print(globals()[key].value)
+                    print()
+                except:
+                    print("WARNING! No variable named", key)
+            elif t.children[0].data == "save":
+                data = self.get_df(t.children[0].children[0])
+                f = t.children[0].children[1].children[0]
+                name = t.children[0].children[2].children[0]
+                save_name = name + "." + f
+                if f == "csv":
+                    data.to_csv(save_name, index=False)
+                elif f == "xlsx":
+                    data.to_excel(save_name, index=False)
 
         elif t.data == 'assignment':
             key = t.children[0].children[0]
@@ -233,7 +258,6 @@ class Interpreter:
 
             # assigning value to the variable
             globals()[key] = Variable(key, value)
-            print(value)
 
     def run_interpreter(self):
         for inst in self.tree.children:

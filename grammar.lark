@@ -20,7 +20,7 @@ data_extraction     : "extract" string_list "from" image | "extract" string_list
 computation         : measure | percentage
 measure             : "compute" value "on" df "[" "each" INT "rows" "]"  | "compute" value "on" df
 percentage          : INT "percent" df | INT "percent" range "rows" df
-save                : "save" df "as" format
+save                : "save" df "as" format "named" name
 show                : "show" df
 image               : "image" string
 folder              : "folder" string
@@ -30,6 +30,7 @@ df                  : CNAME | CNAME string_list
 range               : "[" INT "to" INT  "]" | "[" INT "]"
 string_list         : "[" [string ("," string)*]  "]"
 string              : "[" IMG_FILE "]" | WORD
+name                : WORD
 num                 : FLOAT
 IMG_FILE            : WORD "." WORD
 XLSX                : "xlsx"
