@@ -1,0 +1,16 @@
+VAR a = extract [Name] from a.jpg 
+VAR b = compute max on a[Name]
+VAR c = compute max on a[Name][each 3] 
+VAR d = compute mean on a 
+VAR x = compute 30 % a[2 to 4]
+VAR y = compute 54 % a[2]
+VAR z = compute 9 % a  
+ 
+countplot a, Name 
+
+show a
+
+
+
+
+
