@@ -1,6 +1,0 @@
-VAR b = compute mean on a[Name, Age]
-VAR m = compute max on a[Name][each 3 rows]
-VAR m = compute mode on b
-VAR n = compute 30 % [2 to 4]  a
-VAR n = compute 54 % [2] a
-VAR n = compute 9 % a
