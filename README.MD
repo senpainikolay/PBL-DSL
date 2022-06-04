@@ -2,8 +2,11 @@
 
 WORK IN PROGRESS
 
-Fisco is a DSL built for automatic data extraction from documents stored as images and performing operations on it.
+Fisco is a DSL built for automatic data extraction from documents stored as images and performing operations on it, which can be use to fasten the process of copying data from documents in physical formats.
 
-It was created in Python, using Lark as a parsing toolkit.
+At frst, it was created using Lark as a parsing toolkit. But the final version can be found in the folder [UPDATED-FROM-SCRATH](https://github.com/senpainikolay/PBL-DSL/tree/main/UPDATED-FROM-SCRATH), where the parser was built in Python from scratch, using the recursive descent method. 
 
-All functions for data aggregation are already implemented. The part for data extraction works separately and can be found [here](https://github.com/senpainikolay/PBL-DSL/tree/main/DataExtraction), but not yet integrated in the DSL since extracting data is a complicated process if done properly and needs some more work.
+This DSL can:
+ - Extract Data from images and transform it into structured data (dataframes)
+ - Perform computtions on dataframes (mode, mean, max, min, standard deviation, percentage, mean, sum)
+ - Plot dataframes (displot, countplot, lmplot, scatterplot, barplot)
